@@ -14,7 +14,7 @@ const blog = defineCollection({
       description: z.string(),
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
-      category: z.string().default('Geral'),
+      category: z.enum(['Hidráulica', 'Elétrica', 'Reformas', 'Pintura', 'Pisos', 'Construção']),
       image: image().optional(),
       imageAlt: z.string().optional(),
       draft: z.boolean().default(false),
