@@ -1,0 +1,71 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '../config/site';
+
+interface Props {
+  title: string;
+  seoTitle?: string;
+  description?: string;
+  category: string; // label matching categories.ts keys
+}
+
+const { title, seoTitle, description, category } = Astro.props as Props;
+
+const all = await getCollection('blog', ({ data }) => !data.draft);
+const related = all.filter(p => p.data.category === category).sort((a,b)=> +new Date(b.data.pubDate) - +new Date(a.data.pubDate)).slice(0,6);
+
+const canonical = new URL(`/${category.toLowerCase()}/`, SITE.url).toString();
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Início", "item": SITE.url },
+    { "@type": "ListItem", "position": 2, "name": "Serviços", "item": new URL('/servicos/', SITE.url).toString() },
+    { "@type": "ListItem", "position": 3, "name": title, "item": canonical }
+  ]
+};
+
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": title,
+  "description": description ?? '',
+  "provider": { "@type": "Organization", "name": SITE.name, "url": SITE.url, "logo": SITE.url.replace(/\/$/,'') + '/favicon.svg' },
+  "url": canonical
+};
+---
+
+<BaseLayout title={seoTitle ?? title} description={description} canonical={canonical}>
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <nav class="text-sm text-[var(--color-muted)] mb-4" aria-label="Breadcrumb">
+      <a href="/">Início</a> › <a href="/servicos/">Serviços</a> › <span aria-current="page">{title}</span>
+    </nav>
+
+    <h1 class="mt-2 text-3xl font-bold">{title}</h1>
+    <p class="mt-4 text-[var(--color-muted)]">{description}</p>
+
+    <slot />
+
+    {related.length ? (
+      <section class="mt-12">
+        <h2 class="text-2xl font-semibold">Artigos sobre {category}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+          {related.map(p => <PostCard post={p} />)}
+        </div>
+      </section>
+    ) : null}
+
+    <div class="mt-10 p-6 bg-[var(--color-surface)] border border-[var(--color-border)] rounded">
+      <h3 class="text-lg font-semibold">Precisa de ajuda com {title}?</h3>
+      <p class="mt-2 text-sm text-[var(--color-muted)]">Fale com nossa equipe pelo WhatsApp.</p>
+      <a href={SITE.whatsapp.url} target="_blank" rel="noopener" class="inline-block mt-3 px-4 py-2 bg-[var(--color-brand)] text-white rounded">Falar no WhatsApp</a>
+    </div>
+
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(serviceLd)}></script>
+  </div>
+</BaseLayout>
+

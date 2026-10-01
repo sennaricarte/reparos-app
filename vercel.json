@@ -1,0 +1,10 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/hidraulia", "destination": "/hidraulica/", "statusCode": 301 },
+    { "source": "/hidraulia/", "destination": "/hidraulica/", "statusCode": 301 },
+    { "source": "/hydraulica", "destination": "/hidraulica/", "statusCode": 301 },
+    { "source": "/hydraulica/", "destination": "/hidraulica/", "statusCode": 301 }
+  ]
+}
+
