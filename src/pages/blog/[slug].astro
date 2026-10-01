@@ -32,7 +32,7 @@ const canonical = new URL(`/blog/${post.id}/`, SITE.url).toString();
 const seoTitle = (post.data.seoTitle ?? post.data.title) + ' | ' + SITE.name;
 ---
 
-<BaseLayout title={seoTitle} description={post.data.description} canonical={canonical} image={post.data.image} type="article" publishedTime={post.data.pubDate?.toISOString()} modifiedTime={(post.data.updatedDate ?? post.data.pubDate)?.toISOString()}>
+<BaseLayout title={seoTitle} description={post.data.description} canonical={canonical} {...(post.data.image ? { image: post.data.image } : {})} type="article" publishedTime={post.data.pubDate?.toISOString()} modifiedTime={(post.data.updatedDate ?? post.data.pubDate)?.toISOString()}>
   <div class="max-w-3xl mx-auto px-4 py-12">
     <nav class="text-sm text-[var(--color-muted)] mb-4" aria-label="Breadcrumb">
       <a href="/">Início</a> › <a href="/blog/">Blog</a> › <a href={`/${catInfo.slug}/`}>{catInfo.label}</a> › <span aria-current="page">{post.data.title}</span>
