@@ -329,18 +329,6 @@
       "before": "Reparos.com.br",
       "after": "Reparos.app.br",
       "context": "eriência de quase uma década na <strong>Reparos.app.br</strong> nos mostra que n"
-    },
-    {
-      "file": "C:\\Meus Sites\\reparos\\src\\pages\\privacidade.astro",
-      "before": "reparos.com.br",
-      "after": "reparos.app.br",
-      "context": "ato pelo e-mail <a href=\"mailto:contato@reparos.app.br\">contato@reparos.app.br</"
-    },
-    {
-      "file": "C:\\Meus Sites\\reparos\\src\\pages\\privacidade.astro",
-      "before": "reparos.com.br",
-      "after": "reparos.app.br",
-      "context": "ato pelo e-mail <a href=\"mailto:contato@reparos.app.br\">contato@reparos.app.br</"
     }
   ],
   "unresolved": []
