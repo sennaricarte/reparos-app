@@ -1,19 +1,18 @@
 #!/usr/bin/env node
-/**
- * scripts/fix-domain.mjs
- * Replace reparos.com.br -> reparos.app.br and convert absolute reparos.com.br links to relative.
- * Dry-run by default; pass --apply to write files. Idempotent.
- *
- * Rules:
- * - Operates on src/content/blog/*.md and src/pages/**/*.astro
- * - href="http(s)://(www.)reparos.com.br/CAMINHO" => relative mapping:
- *    root -> "/"
- *    /blog/SLUG or /SLUG where SLUG exists -> "/blog/SLUG/"
- *    fixed pages -> "/PAGINA/"
- *    unknown paths: leave unchanged and report
- * - Text replacements: "Reparos.com.br"/"reparos.com.br"/"www.reparos.com.br" -> "Reparos.app.br"/"reparos.app.br"
- * - Use String.replace with global regex and callback (no exec loops)
- */
+// scripts/fix-domain.mjs
+// Replace reparos.com.br -> reparos.app.br and convert absolute reparos.com.br links to relative.
+// Dry-run by default; pass --apply to write files. Idempotent.
+//
+// Rules:
+// - Operates on src/content/blog/*.md and src/pages (recursivo, arquivos .astro)
+// - href="http(s)://(www.)reparos.com.br/CAMINHO" => relative mapping:
+//    root -> "/"
+//    /blog/SLUG or /SLUG where SLUG exists -> "/blog/SLUG/"
+//    fixed pages -> "/PAGINA/"
+//    unknown paths: leave unchanged and report
+// - Text replacements: "Reparos.com.br"/"reparos.com.br"/"www.reparos.com.br" -> "Reparos.app.br"/"reparos.app.br"
+// - The frontmatter (title, description) also enters in the text replacement
+// - Use String.replace with global regex and callback (no exec loops)
 import fs from 'fs/promises';
 import path from 'path';
 
