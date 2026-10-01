@@ -86,15 +86,78 @@ async function processEntry(entry, report) {
   const outPath = path.join(ASSETS_DIR, outName);
 
   try {
-    // skip if exists and is valid
+    // check if target file exists and is valid
+    let alreadyValid = false;
     if (await fileExists(outPath)) {
       try {
         await sharp(outPath).metadata();
-        report.skipped.push({ slug, reason: 'já existe e válida', path: outPath });
-        return;
+        alreadyValid = true;
       } catch {
         // corrupted -> continue to re-download
       }
+    }
+
+    // If the file already exists and is valid, we should still ensure the post frontmatter
+    // contains image/imageAlt. Fetch photo details (to obtain photographer) and update frontmatter,
+    // but do NOT re-download or overwrite the image.
+    if (alreadyValid) {
+      // fetch photo details to get photographer info
+      const photoUrl = `https://api.pexels.com/v1/photos/${coverId}`;
+      let photoData;
+      try {
+        photoData = await fetchJson(photoUrl);
+      } catch (err) {
+        // couldn't fetch details, but since image exists, report as skipped with fetch error
+        report.skipped.push({ slug, reason: 'já existe e válida (falha ao buscar metadados)', path: outPath, error: String(err) });
+        return;
+      }
+
+      const photographer = photoData?.photographer ?? 'Fotógrafo';
+      const photographerUrl = photoData?.photographer_url ?? photoData?.url ?? '';
+
+      // update frontmatter (reuse same logic as below)
+      try {
+        const postFile = await findPostFileBySlug(slug);
+        if (!postFile) {
+          report.failed.push({ slug, reason: 'post file not found' });
+          return;
+        }
+        let txt = await fs.readFile(postFile, 'utf8');
+        const fmMatch = txt.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+        if (!fmMatch) {
+          report.failed.push({ slug, reason: 'frontmatter not found' });
+          return;
+        }
+        const fm = fmMatch[1];
+        let body = fmMatch[2];
+
+        const relPath = `../../assets/blog/${outName}`;
+        // add image and imageAlt if absent
+        let newFm = fm;
+        if (!/^\s*image\s*:/m.test(fm)) {
+          newFm = fm + `\nimage: "${relPath}"\nimageAlt: "Foto de serviço de ${category} — ${photographer} via Pexels"`;
+        } else if (!/^\s*imageAlt\s*:/m.test(fm)) {
+          newFm = fm.replace(/\n$/, '') + `\nimageAlt: "Foto de serviço de ${category} — ${photographer} via Pexels"`;
+        }
+
+        // credit paragraph
+        const creditHtml = `<p class="text-xs text-gray-500">Foto: <a href="${escapeHtml(photographerUrl || '#')}">${escapeHtml(photographer)}</a> via <a href="https://www.pexels.com">Pexels</a></p>`;
+        if (!body.includes(creditHtml)) {
+          const ctaRegex = /(<p[^>]*>[\s\S]*?(?:WhatsApp|orçamento|Orçamento)[\s\S]*?<\/p>)(?![\s\S]*<p[^>]*>[\s\S]*(?:WhatsApp|orçamento|Orçamento)[\s\S]*<\/p>)/i;
+          if (ctaRegex.test(body)) {
+            body = body.replace(ctaRegex, (m) => `${creditHtml}\n\n${m}`);
+          } else {
+            body = `${body}\n\n${creditHtml}\n`;
+          }
+        }
+
+        const newTxt = `---\n${newFm}\n---\n${body}`;
+        await fs.writeFile(postFile, newTxt, 'utf8');
+        report.skipped.push({ slug, reason: 'já existe e válida; frontmatter atualizado', path: outPath });
+      } catch (err) {
+        report.failed.push({ slug, reason: 'updating post failed', error: String(err) });
+      }
+      return;
     }
 
     // fetch photo details
