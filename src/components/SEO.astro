@@ -1,6 +1,7 @@
 ---
 import { SITE } from '../config/site';
 import { getImage } from 'astro:assets';
+import ogDefault from '../assets/og-default.png';
 
 interface Props {
   title: string;
@@ -48,41 +49,48 @@ let ogImage = undefined;
 let ogImageWidth = undefined;
 let ogImageHeight = undefined;
 let ogImageAlt = undefined;
-if (image) {
-  if (typeof image === 'string') {
-    ogImage = image;
-  } else {
-    // ImageMetadata -> generate 1200x630 jpg
-    try {
-      const generated = await getImage(image, { width: 1200, height: 630, format: 'jpg' });
-      ogImage = generated.src;
-      ogImageWidth = generated.width;
-      ogImageHeight = generated.height;
-    } catch {
-      // fallback: ignore
-    }
-  }
-} else {
-  // no image provided: try to use generated og-default.png if available; fall back to SITE url path
-  let ogDefault = null;
+
+async function generateOgFromSrc(src: string | URL) {
   try {
-    ogDefault = await import('../assets/og-default.png');
+    const generated = await getImage({ src: src }, { width: 1200, height: 630, format: 'jpg' } as any);
+    // generated.src is typically a path like '/_astro/xyz.jpg' — make absolute
+    const abs = new URL(generated.src, SITE.url).toString();
+    return { src: abs, width: generated.width, height: generated.height };
   } catch {
-    ogDefault = null;
+    return null;
   }
-  if (ogDefault && ogDefault.default) {
-    try {
-      const generated = await getImage(ogDefault.default, { width: 1200, height: 630, format: 'jpg' });
-      ogImage = generated.src;
-      ogImageWidth = generated.width;
-      ogImageHeight = generated.height;
-    } catch {
-      ogImage = SITE.url.replace(/\/$/, '') + '/assets/og-default.png';
+}
+
+if (image) {
+  // image can be string or ImageMetadata. Normalize to a src and always generate JPG via getImage
+  if (typeof image === 'string') {
+    const res = await generateOgFromSrc(image);
+    if (res) {
+      ogImage = res.src;
+      ogImageWidth = res.width;
+      ogImageHeight = res.height;
+    } else {
+      ogImage = new URL(image, SITE.url).toString();
       ogImageWidth = 1200;
       ogImageHeight = 630;
     }
   } else {
-    ogImage = SITE.url.replace(/\/$/, '') + '/assets/og-default.png';
+    const res = await generateOgFromSrc(image);
+    if (res) {
+      ogImage = res.src;
+      ogImageWidth = res.width;
+      ogImageHeight = res.height;
+    }
+  }
+} else {
+  // use imported ogDefault
+  const res = await generateOgFromSrc(ogDefault);
+  if (res) {
+    ogImage = res.src;
+    ogImageWidth = res.width;
+    ogImageHeight = res.height;
+  } else {
+    ogImage = new URL('/assets/og-default.png', SITE.url).toString();
     ogImageWidth = 1200;
     ogImageHeight = 630;
   }

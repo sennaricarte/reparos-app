@@ -11,12 +11,13 @@ import inter400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 const { title, description, canonical, image, type, publishedTime, modifiedTime, noindex } = Astro.props;
 
 // Organization & Website JSON-LD
+const siteUrl = SITE.url.endsWith('/') ? SITE.url : SITE.url + '/';
 const org = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": SITE.name,
-  "url": SITE.url,
-  "logo": SITE.url.replace(/\/$/, '') + '/favicon.svg',
+  "url": siteUrl,
+  "logo": siteUrl + 'favicon.svg',
   "foundingDate": "2015",
   "contactPoint": [{
     "@type": "ContactPoint",
@@ -27,7 +28,7 @@ const org = {
 const websiteLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "url": SITE.url,
+  "url": siteUrl,
   "name": SITE.name
 };
 ---
