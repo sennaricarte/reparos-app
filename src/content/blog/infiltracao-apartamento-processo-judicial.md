@@ -3,6 +3,8 @@ title: "Infiltração no Apartamento: Quando o Problema Vira Processo Judicial?"
 seoTitle: "Infiltração no Apartamento e Processo Judicial: Entenda Seus Direitos"
 description: "Infiltração no apartamento pode virar processo judicial. Saiba quando acionar o vizinho ou o condomínio, quais são seus direitos e quando buscar um advogado."
 pubDate: 2026-10-01T10:00:00.000-03:00
+image: "../../assets/blog/infiltracao-apartamento-processo-judicial-featured.jpg"
+imageAlt: "Luz atravessando vidro — Chris F via Pexels"
 category: "Hidráulica"
 draft: false
 ---
