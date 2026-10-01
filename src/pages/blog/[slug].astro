@@ -18,7 +18,7 @@ const posts = await getCollection('blog');
 const post = posts.find(p => p.id === params.slug) as CollectionEntry<'blog'> | undefined;
 if (!post) throw new Error('Post not found');
 
-const content = await render(post.body);
+const { Content } = await render(post);
 
 const category = post.data.category;
 const catInfo = CATEGORIES[category] ?? { slug: 'blog', label: category };
@@ -30,6 +30,12 @@ const related = posts
 
 const canonical = new URL(`/blog/${post.id}/`, SITE.url).toString();
 const seoTitle = (post.data.seoTitle ?? post.data.title) + ' | ' + SITE.name;
+
+// compute whether updatedDate is a different day than pubDate in America/Sao_Paulo
+const pubDay = new Date(post.data.pubDate).toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' });
+const updatedDay = post.data.updatedDate ? new Date(post.data.updatedDate).toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' }) : null;
+const showUpdated = updatedDay && updatedDay !== pubDay;
+const jsonDateModified = showUpdated ? (post.data.updatedDate ?? post.data.pubDate).toISOString() : post.data.pubDate.toISOString();
 ---
 
 <BaseLayout title={seoTitle} description={post.data.description} canonical={canonical} {...(post.data.image ? { image: post.data.image } : {})} type="article" publishedTime={post.data.pubDate?.toISOString()} modifiedTime={(post.data.updatedDate ?? post.data.pubDate)?.toISOString()}>
@@ -42,7 +48,7 @@ const seoTitle = (post.data.seoTitle ?? post.data.title) + ' | ' + SITE.name;
     <h1 class="mt-4 text-3xl font-bold">{post.data.title}</h1>
     <div class="text-sm text-[var(--color-muted)] mt-2">
       <span>Senna Ricarte — Publicado em <time datetime={post.data.pubDate.toISOString()}>{new Date(post.data.pubDate).toLocaleDateString('pt-BR', { dateStyle: 'long' })}</time></span>
-      {post.data.updatedDate && post.data.updatedDate.toISOString() !== post.data.pubDate.toISOString() ? (
+      {showUpdated ? (
         <span> — Atualizado em <time datetime={post.data.updatedDate.toISOString()}>{new Date(post.data.updatedDate).toLocaleDateString('pt-BR', { dateStyle: 'long' })}</time></span>
       ) : null}
     </div>
@@ -54,7 +60,7 @@ const seoTitle = (post.data.seoTitle ?? post.data.title) + ' | ' + SITE.name;
     ) : null}
 
     <div class="prose prose-slate lg:prose-lg max-w-none mt-8 prose-a:text-[var(--color-brand)] prose-img:rounded-lg">
-      <div set:html={content.contents} />
+      <Content />
     </div>
 
     {related.length ? (
@@ -80,7 +86,7 @@ const seoTitle = (post.data.seoTitle ?? post.data.title) + ' | ' + SITE.name;
       "description": post.data.description,
       "image": [new URL(post.data.image ? (post.data.image.src ?? post.data.image) : '/assets/og-default.png', SITE.url).toString()],
       "datePublished": post.data.pubDate.toISOString(),
-      "dateModified": (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+      "dateModified": jsonDateModified,
       "author": { "@type": "Person", "name": "Senna Ricarte" },
       "publisher": { "@type": "Organization", "name": SITE.name, "logo": SITE.url.replace(/\/$/, '') + '/favicon.svg' },
       "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },

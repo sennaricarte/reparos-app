@@ -2,7 +2,7 @@
 import { SITE } from '../config/site';
 const current = Astro.url.pathname;
 ---
-<header class="bg-white/90 sticky top-0 z-40 border-b" role="banner">
+<header class="bg-white sticky top-0 z-40 border-b" role="banner">
   <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
     <a href="/" class="flex items-center gap-3" aria-label="Reparos - Início">
       <svg class="w-8 h-8 text-[var(--color-brand)]" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -24,19 +24,46 @@ const current = Astro.url.pathname;
     </nav>
 
     <!-- Mobile menu using details (no JS) -->
-    <details class="md:hidden">
-      <summary class="p-3 rounded-md focus:outline-none" aria-label="Abrir menu de navegação">Menu</summary>
-      <div class="mt-2 flex flex-col gap-2 p-3">
-        <a href="/hidraulica/" class="py-2">Hidráulica</a>
-        <a href="/eletrica/" class="py-2">Elétrica</a>
-        <a href="/reformas/" class="py-2">Reformas</a>
-        <a href="/pintura/" class="py-2">Pintura</a>
-        <a href="/pisos/" class="py-2">Pisos</a>
-        <a href="/construcao/" class="py-2">Construção</a>
-        <a href="/blog/" class="py-2">Blog</a>
-        <a href="/sobre/" class="py-2">Sobre</a>
+    <details class="md:hidden" style="position:relative;">
+      <summary class="mobile-summary p-3 rounded-md focus:outline-none" aria-label="Abrir menu de navegação">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="sr-only">Menu</span>
+      </summary>
+      <div class="mobile-panel mt-2 flex flex-col gap-0 p-0">
+        <a href="/hidraulica/" class="mobile-link">Hidráulica</a>
+        <a href="/eletrica/" class="mobile-link">Elétrica</a>
+        <a href="/reformas/" class="mobile-link">Reformas</a>
+        <a href="/pintura/" class="mobile-link">Pintura</a>
+        <a href="/pisos/" class="mobile-link">Pisos</a>
+        <a href="/construcao/" class="mobile-link">Construção</a>
+        <a href="/blog/" class="mobile-link">Blog</a>
+        <a href="/sobre/" class="mobile-link">Sobre</a>
       </div>
     </details>
   </div>
 </header>
 
+<style>
+/* Mobile details summary: hide default marker and style */
+details summary { list-style: none; }
+details summary::-webkit-details-marker { display: none; }
+.mobile-summary { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; }
+.mobile-summary svg { display: block; width: 20px; height: 20px; }
+.mobile-panel { display: none; }
+details[open] > .mobile-panel {
+  display: flex;
+  position: absolute;
+  left: calc(50% - 50vw);
+  right: calc(50% - 50vw);
+  top: 100%;
+  background: white;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 8px 0;
+  z-index: 40;
+  flex-direction: column;
+}
+.mobile-panel .mobile-link { display:block; height:48px; line-height:48px; padding: 0 1rem; border-bottom: 1px solid rgba(0,0,0,0.04); color: inherit; text-decoration: none; }
+.mobile-panel .mobile-link:last-child { border-bottom: none; }
+</style>
