@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  eager?: boolean;
+}
+
+const { post, eager = false } = Astro.props as Props;
+const title = post.data.seoTitle ?? post.data.title;
+const href = `/blog/${post.id}/`;
+---
+<style>
+.card { position: relative; overflow: hidden; border-radius: .5rem; background: white; }
+.card .overlay-link { position: absolute; inset: 0; z-index: 0; }
+.card .content { position: relative; z-index: 1; padding: 0.75rem; }
+.card .title { margin: 0.5rem 0; font-weight: 700; }
+.card .meta { font-size: 0.875rem; color: var(--color-muted); }
+.card .category { font-size: 0.75rem; padding: 0.15rem .5rem; background: var(--color-brand); color: white; border-radius: .375rem; display: inline-block; }
+.card .desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.img-wrap { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #f3f4f6; }
+.img-wrap img { width: 100%; height: 100%; object-fit: cover; display:block; }
+</style>
+
+<article class="card shadow-sm">
+  <div class="img-wrap">
+    {post.data.image ? (
+      <Image src={post.data.image} widths={[400,800]} sizes="(min-width: 768px) 33vw, 100vw" formats={['webp']} alt={post.data.imageAlt ?? title} class="object-cover" loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} style="width:100%;height:100%;object-fit:cover" />
+    ) : null}
+  </div>
+
+  <div class="content">
+    <div class="category">{post.data.category}</div>
+    <h3 class="title">
+      <a href={href} class="overlay-link" aria-label={title}></a>
+      <a href={href} class="title-link" style="position:relative; z-index:2; text-decoration:none; color:inherit;">{title}</a>
+    </h3>
+    <p class="desc text-sm text-[var(--color-muted)]">{post.data.description}</p>
+    <div class="meta mt-2">
+      <time datetime={post.data.pubDate.toISOString()}>{new Date(post.data.pubDate).toLocaleDateString('pt-BR')}</time>
+    </div>
+  </div>
+</article>
+

@@ -1,0 +1,91 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import Schema from '../../components/Schema.astro';
+import { SITE } from '../../config/site';
+import { CATEGORIES } from '../../config/categories';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map(p => ({ params: { slug: p.id } }));
+}
+
+const params = Astro.params;
+const posts = await getCollection('blog');
+const post = posts.find(p => p.id === params.slug) as CollectionEntry<'blog'> | undefined;
+if (!post) throw new Error('Post not found');
+
+const content = await render(post.body);
+
+const category = post.data.category;
+const catInfo = CATEGORIES[category] ?? { slug: 'blog', label: category };
+
+const related = posts
+  .filter(p => p.id !== post.id && p.data.category === category && !p.data.draft)
+  .sort((a,b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate))
+  .slice(0,3);
+
+const canonical = new URL(`/blog/${post.id}/`, SITE.url).toString();
+const seoTitle = (post.data.seoTitle ?? post.data.title) + ' | ' + SITE.name;
+---
+
+<BaseLayout title={seoTitle} description={post.data.description} canonical={canonical} image={post.data.image} type="article" publishedTime={post.data.pubDate?.toISOString()} modifiedTime={(post.data.updatedDate ?? post.data.pubDate)?.toISOString()}>
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <nav class="text-sm text-[var(--color-muted)] mb-4" aria-label="Breadcrumb">
+      <a href="/">Início</a> › <a href="/blog/">Blog</a> › <a href={`/${catInfo.slug}/`}>{catInfo.label}</a> › <span aria-current="page">{post.data.title}</span>
+    </nav>
+
+    <a href={`/${catInfo.slug}/`} class="inline-block text-xs px-2 py-1 bg-[var(--color-brand)] text-white rounded">{catInfo.label}</a>
+    <h1 class="mt-4 text-3xl font-bold">{post.data.title}</h1>
+    <div class="text-sm text-[var(--color-muted)] mt-2">
+      <span>Senna Ricarte — Publicado em <time datetime={post.data.pubDate.toISOString()}>{new Date(post.data.pubDate).toLocaleDateString('pt-BR', { dateStyle: 'long' })}</time></span>
+      {post.data.updatedDate && post.data.updatedDate.toISOString() !== post.data.pubDate.toISOString() ? (
+        <span> — Atualizado em <time datetime={post.data.updatedDate.toISOString()}>{new Date(post.data.updatedDate).toLocaleDateString('pt-BR', { dateStyle: 'long' })}</time></span>
+      ) : null}
+    </div>
+
+    {post.data.image ? (
+      <div class="mt-6" style="aspect-ratio:16/9; overflow:hidden; border-radius:.5rem;">
+        <Image src={post.data.image} formats={['avif','webp']} widths={[480,800,1200]} sizes="(min-width: 896px) 896px, 100vw" alt={post.data.imageAlt ?? post.data.title} class="w-full h-full object-cover" loading="eager" fetchpriority="high" />
+      </div>
+    ) : null}
+
+    <div class="prose prose-slate lg:prose-lg max-w-none mt-8 prose-a:text-[var(--color-brand)] prose-img:rounded-lg">
+      <div set:html={content.contents} />
+    </div>
+
+    {related.length ? (
+      <>
+        <h2 class="mt-12 text-2xl font-semibold">Continue lendo sobre {catInfo.label}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+          {related.map(r => <PostCard post={r} />)}
+        </div>
+      </>
+    ) : null}
+
+    <div class="mt-12 p-6 bg-[var(--color-surface)] border border-[var(--color-border)] rounded">
+      <h2 class="text-xl font-semibold">Precisa de ajuda com {catInfo.label}?</h2>
+      <p class="mt-2">Entre em contato com nossa equipe.</p>
+      <a href={SITE.whatsapp.url} target="_blank" rel="noopener" class="inline-block mt-3 px-4 py-2 bg-[var(--color-brand)] text-white rounded">Falar no WhatsApp</a>
+    </div>
+
+    <!-- JSON-LD -->
+    <Schema data={{
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": post.data.title,
+      "description": post.data.description,
+      "image": [new URL(post.data.image ? (post.data.image.src ?? post.data.image) : '/assets/og-default.png', SITE.url).toString()],
+      "datePublished": post.data.pubDate.toISOString(),
+      "dateModified": (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+      "author": { "@type": "Person", "name": "Senna Ricarte" },
+      "publisher": { "@type": "Organization", "name": SITE.name, "logo": SITE.url.replace(/\/$/, '') + '/favicon.svg' },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
+      "inLanguage": "pt-BR"
+    }} />
+  </div>
+</BaseLayout>
+
