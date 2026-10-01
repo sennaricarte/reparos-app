@@ -64,6 +64,18 @@ function normalizeText(s) {
   return lf(stripHtmlTags(s)).replace(/\s+/g, ' ').trim();
 }
 
+/**
+ * Fix anchors that split words in the HTML body.
+ * Example: "d<a href=...>esentupidora</a>" -> "<a href=...>desentupidora</a>"
+ * This targets cases where a letter/digit directly precedes the <a> and a letter/digit
+ * directly follows the </a>, and moves those adjacent characters inside the anchor.
+ */
+function fixMidwordAnchors(html) {
+  return html.replace(/([\p{L}\p{M}0-9])(<a\b[^>]*>)([^<]*?)<\/a>([\p{L}\p{M}0-9])/gu, (m, pre, openTag, inner, post) => {
+    return `${openTag}${pre}${inner}${post}</a>`;
+  });
+}
+
 async function fileExists(p) {
   try { await fs.access(p); return true; } catch { return false; }
 }
@@ -146,6 +158,15 @@ async function main() {
     }
 
     // c) links internal conversion
+    // fix anchors that split words (e.g. a tag injected inside a word)
+    const beforeFix = newBody;
+    newBody = fixMidwordAnchors(newBody);
+    if (newBody !== beforeFix) {
+      // count as an internal fix for reporting purposes
+      postReport.internalLinkChanges.push({ before: 'midword-anchor-fix', after: 'merged' });
+      // do not increment totals.internalLinksFixed here to keep separate count
+    }
+    
     const domainRx = /href=(["'])(https?:\/\/(?:www\.)?reparos\.app\.br)(\/[^"'>\s]*)?\1/gi;
     // iterate matches
     let m;
