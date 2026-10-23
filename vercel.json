@@ -4,7 +4,14 @@
     { "source": "/hidraulia", "destination": "/hidraulica/", "statusCode": 301 },
     { "source": "/hidraulia/", "destination": "/hidraulica/", "statusCode": 301 },
     { "source": "/hydraulica", "destination": "/hidraulica/", "statusCode": 301 },
-    { "source": "/hydraulica/", "destination": "/hidraulica/", "statusCode": 301 }
+    { "source": "/hydraulica/", "destination": "/hidraulica/", "statusCode": 301 },
+    { "source": "/blog/dicas", "destination": "/blog/", "statusCode": 301 },
+    { "source": "/blog/dicas/", "destination": "/blog/", "statusCode": 301 },
+    { "source": "/reforma-em-sao-paulo", "destination": "/reformas/", "statusCode": 301 },
+    { "source": "/reforma-em-sao-paulo/", "destination": "/reformas/", "statusCode": 301 },
+    { "source": "/eletricista-em-sao-paulo", "destination": "/eletrica/", "statusCode": 301 },
+    { "source": "/eletricista-em-sao-paulo/", "destination": "/eletrica/", "statusCode": 301 },
+    { "source": "/como-desentupir-vaso-sem-desentupidor", "destination": "/blog/como-desentupir-vaso-sem-desentupidor/", "statusCode": 301 },
+    { "source": "/como-desentupir-vaso-sem-desentupidor/", "destination": "/blog/como-desentupir-vaso-sem-desentupidor/", "statusCode": 301 }
   ]
 }
-

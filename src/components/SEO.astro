@@ -42,7 +42,8 @@ function normalizeCanonical(c?: string) {
   }
 }
 
-const canonicalAbs = normalizeCanonical(canonical ?? SITE.url);
+// default to the current page path, never the home page
+const canonicalAbs = normalizeCanonical(canonical ?? Astro.url.pathname);
 const ogUrl = canonicalAbs;
 
 let ogImage = undefined;
