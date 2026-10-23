@@ -10,7 +10,7 @@ const recent = posts.slice(0,3);
 ---
 
 <BaseLayout title="Reparos Profissionais em São Paulo" description={SITE.description} canonical={SITE.url}>
-  <main class="max-w-6xl mx-auto px-4">
+  <div class="max-w-6xl mx-auto px-4">
 
     <!-- Hero -->
     <section class="py-16">
@@ -125,16 +125,5 @@ const recent = posts.slice(0,3);
       }
     })} />
 
-  </main>
-</BaseLayout>
-
----
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE } from '../config/site';
----
-<BaseLayout title="Reparos Profissionais em São Paulo" description={SITE.description}>
-  <div class="max-w-6xl mx-auto px-4 py-16 text-left">
-    <h1 class="text-3xl font-bold">Reparos Profissionais em São Paulo</h1>
-    <p class="mt-4 text-[var(--color-muted)]">Conteúdo em construção — esta é uma página provisória.</p>
   </div>
 </BaseLayout>

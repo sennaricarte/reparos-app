@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
 import { getCollection } from 'astro:content';
 import { SITE } from '../config/site';
+import { CATEGORIES } from '../config/categories';
 
 interface Props {
   title: string;
@@ -16,7 +17,8 @@ const { title, seoTitle, description, category } = Astro.props as Props;
 const all = await getCollection('blog', ({ data }) => !data.draft);
 const related = all.filter(p => p.data.category === category).sort((a,b)=> +new Date(b.data.pubDate) - +new Date(a.data.pubDate)).slice(0,6);
 
-const canonical = new URL(`/${category.toLowerCase()}/`, SITE.url).toString();
+const slug = CATEGORIES[category]?.slug ?? category.toLowerCase();
+const canonical = new URL(`/${slug}/`, SITE.url).toString();
 
 const breadcrumbLd = {
   "@context": "https://schema.org",
