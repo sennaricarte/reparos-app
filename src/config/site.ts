@@ -1,9 +1,8 @@
 export const SITE = {
   name: 'Reparos',
   url: 'https://reparos.app.br',
-  description: 'Reparos Profissionais em São Paulo - Hidráulica, Elétrica e Reformas em geral.',
+  description: 'Encontre profissionais de hidráulica, elétrica e reformas em São Paulo. Descreva o que precisa pelo WhatsApp.',
   locale: 'pt_BR',
-  foundingYear: 2015,
   whatsapp: {
     number: '5511961485763',
     display: '(11) 96148-5763',
