@@ -28,8 +28,8 @@ draft: false
 
 <h2>O papel do laudo hidráulico no processo</h2>
 <p>O laudo técnico de origem do vazamento é peça-chave em ações judiciais sobre infiltração. Ele descreve meticulosamente as causas prováveis da infiltração, identifica o ponto de origem do vazamento e indica intervenções necessárias. Perícias e laudos bem elaborados tendem a reduzir disputas sobre a autoria do dano e orientam decisões judiciais e acordos entre as partes.</p>
-<p>A Reparos realiza diagnósticos e vistoria técnica em São Paulo para identificar a origem da infiltração e emitir relatórios técnicos que podem ser usados como subsídio técnico em negociações ou em processos judiciais. Esses relatórios não substituem pareceres legais, mas constituintes de prova técnica para orientar os próximos passos.</p>
+<p>Um profissional qualificado pode fazer o diagnóstico e a vistoria técnica para identificar a origem da infiltração e emitir relatório técnico, que pode servir de subsídio em negociações ou em processos judiciais. Esse relatório não substitui parecer legal, mas ajuda a orientar os próximos passos.</p>
 <p>Se o laudo concluir que o problema decorre de instalação no apartamento vizinho, o documento facilita a cobrança administrativa ou judicial; se apontar origem em área comum, direciona a responsabilidade ao condomínio. Em muitas situações, a simples apresentação de um laudo técnico pode acelerar a resolução administrativa, evitando a necessidade de litígio.</p>
 
-<p>Precisa de um diagnóstico técnico para identificar a origem da infiltração? <a href="https://wa.me/5511961485763">Fale com nossa equipe pelo WhatsApp</a> e solicite uma vistoria.</p>
+<p>Precisa de um diagnóstico técnico para identificar a origem da infiltração? <a href="https://wa.me/5511961485763">Fale pelo WhatsApp</a> e receba indicação de profissionais para uma vistoria.</p>
 
