@@ -6,7 +6,7 @@ import PostCard from '../components/PostCard.astro';
 
 const posts = await getCollection('blog', ({ data }) => !data.draft);
 posts.sort((a,b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate));
-const HOME_POSTS = 6;
+const HOME_POSTS = 12;
 const recent = posts.slice(0, HOME_POSTS);
 ---
 
