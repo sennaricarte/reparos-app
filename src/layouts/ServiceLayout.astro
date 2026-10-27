@@ -9,10 +9,11 @@ interface Props {
   title: string;
   seoTitle?: string;
   description?: string;
+  metaDescription?: string;
   category: string; // label matching categories.ts keys
 }
 
-const { title, seoTitle, description, category } = Astro.props as Props;
+const { title, seoTitle, description, metaDescription, category } = Astro.props as Props;
 
 const all = await getCollection('blog', ({ data }) => !data.draft);
 const related = all.filter(p => p.data.category === category).sort((a,b)=> +new Date(b.data.pubDate) - +new Date(a.data.pubDate)).slice(0,6);
@@ -39,7 +40,7 @@ const serviceLd = {
 };
 ---
 
-<BaseLayout title={seoTitle ?? title} description={description} canonical={canonical}>
+<BaseLayout title={seoTitle ?? title} description={metaDescription ?? description} canonical={canonical}>
   <div class="max-w-3xl mx-auto px-4 py-12">
     <nav class="text-sm text-[var(--color-muted)] mb-4" aria-label="Breadcrumb">
       <a href="/">Início</a> › <span aria-current="page">{title}</span>

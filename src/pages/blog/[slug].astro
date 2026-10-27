@@ -47,7 +47,7 @@ const jsonDateModified = showUpdated ? (post.data.updatedDate ?? post.data.pubDa
     <a href={`/${catInfo.slug}/`} class="inline-block text-xs px-2 py-1 bg-[var(--color-brand)] text-white rounded">{catInfo.label}</a>
     <h1 class="mt-4 text-3xl font-bold">{post.data.title}</h1>
     <div class="text-sm text-[var(--color-muted)] mt-2">
-      <span>Senna Ricarte — Publicado em <time datetime={post.data.pubDate.toISOString()}>{new Date(post.data.pubDate).toLocaleDateString('pt-BR', { dateStyle: 'long' })}</time></span>
+      <span>Por Equipe Reparos — Publicado em <time datetime={post.data.pubDate.toISOString()}>{new Date(post.data.pubDate).toLocaleDateString('pt-BR', { dateStyle: 'long' })}</time></span>
       {showUpdated ? (
         <span> — Atualizado em <time datetime={post.data.updatedDate.toISOString()}>{new Date(post.data.updatedDate).toLocaleDateString('pt-BR', { dateStyle: 'long' })}</time></span>
       ) : null}
@@ -87,10 +87,21 @@ const jsonDateModified = showUpdated ? (post.data.updatedDate ?? post.data.pubDa
       "image": [new URL(post.data.image ? (post.data.image.src ?? post.data.image) : '/assets/og-default.png', SITE.url).toString()],
       "datePublished": post.data.pubDate.toISOString(),
       "dateModified": jsonDateModified,
-      "author": { "@type": "Person", "name": "Senna Ricarte" },
+      "author": { "@type": "Organization", "name": SITE.name, "url": SITE.url },
       "publisher": { "@type": "Organization", "name": SITE.name, "logo": SITE.url.replace(/\/$/, '') + '/favicon.svg' },
       "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
       "inLanguage": "pt-BR"
+    }} />
+
+    <Schema data={{
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Início", "item": SITE.url + "/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": new URL('/blog/', SITE.url).toString() },
+        { "@type": "ListItem", "position": 3, "name": catInfo.label, "item": new URL(`/${catInfo.slug}/`, SITE.url).toString() },
+        { "@type": "ListItem", "position": 4, "name": post.data.title, "item": canonical }
+      ]
     }} />
   </div>
 </BaseLayout>

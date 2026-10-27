@@ -23,7 +23,7 @@ draft: false
 
 <h2>Quando o caso vai para a Justiça?</h2>
 <p>A via judicial é recomendada quando o vizinho nega responsabilidade ou se recusa a reparar o dano, e quando esgotadas as tentativas de acordo. Casos de menor complexidade e cujo valor não exceda o limite do Juizado Especial Cível podem ser ajuizados sem a necessidade de advogado, seguindo as regras desse juizado para causas de menor valor e prazos simplificados.</p>
-<p>Para problemas que envolvam danos maiores, valor de restauração significativo, danos estruturais ou disputas condominiais complexas, é aconselhável consultar um advogado especializado em direito civil para avaliar a estratégia, reunir provas e representar a parte em juízo. Se precisar de orientação jurídica, considere buscar uma <a href="https://www.karinepaulinoadvocacia.com.br">advogada especialista em Direito Civil</a> para esclarecimentos e encaminhamentos adequados ao seu caso.</p>
+<p>Para problemas que envolvam danos maiores, valor de restauração significativo, danos estruturais ou disputas condominiais complexas, é aconselhável consultar um advogado especializado em direito civil para avaliar a estratégia, reunir provas e representar a parte em juízo. Se precisar de orientação jurídica, considere buscar uma <a href="https://www.karinepaulinoadvocacia.com.br" rel="nofollow noopener">advogada especialista em Direito Civil</a> para esclarecimentos e encaminhamentos adequados ao seu caso.</p>
 <p>Em qualquer ação, a qualidade das provas técnicas e documentais, como laudo, fotos datadas, comunicação formal e orçamentos, faz grande diferença no convencimento do juízo sobre a origem do dano e na quantificação dos prejuízos.</p>
 
 <h2>O papel do laudo hidráulico no processo</h2>
