@@ -6,7 +6,8 @@ import PostCard from '../components/PostCard.astro';
 
 const posts = await getCollection('blog', ({ data }) => !data.draft);
 posts.sort((a,b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate));
-const recent = posts.slice(0,3);
+const HOME_POSTS = 6;
+const recent = posts.slice(0, HOME_POSTS);
 ---
 
 <BaseLayout title="Reparos Profissionais em São Paulo" description={SITE.description} canonical={SITE.url}>
@@ -100,6 +101,7 @@ const recent = posts.slice(0,3);
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {recent.map(p => <PostCard post={p} />)}
       </div>
+      <p class="mt-8 text-center"><a href="/blog/" class="inline-block px-6 py-3 rounded-md text-[var(--color-brand)] border border-[var(--color-border)] font-semibold">Ver todos os artigos</a></p>
     </section>
 
     <!-- Final CTA -->
