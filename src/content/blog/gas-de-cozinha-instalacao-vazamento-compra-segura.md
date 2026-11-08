@@ -4,6 +4,8 @@ seoTitle: "Gás de Cozinha: Instalação, Vazamento e Compra Segura"
 description: "Guia de gás de cozinha: como instalar o botijão, testar vazamento, conferir a validade da mangueira e do regulador e o que fazer ao sentir cheiro de gás."
 pubDate: 2026-11-08T20:30:00-03:00
 category: "Construção"
+image: "../../assets/blog/gas-de-cozinha-instalacao-vazamento-compra-segura-featured.jpg"
+imageAlt: "Close de um queimador de fogão a gás aceso, com chama azul ao redor e uma chama alaranjada subindo ao fundo"
 ---
 
 Cheiro de gás na cozinha não espera. Saber o que fazer antes de o problema aparecer reduz o risco de acidente e evita compra de peças vencidas.
@@ -149,3 +151,5 @@ Informações conferidas em 08/11/2026.
 - [Defesa Civil de Curitiba: cuidados com o gás de cozinha](https://www.curitiba.pr.gov.br/noticias/defesa-civil-alerta-para-os-cuidados-com-o-gas-de-cozinha/64639): teste com espuma de sabão e o que fazer em caso de vazamento.
 - [ABNT NBR 15526](https://normas.com.br/visualizar/abnt-nbr-nm/26611/abnt-nbr15526-redes-de-distribuicao-interna-para-gases-combustiveis-em-instalacoes-residenciais-e-comerciais-projeto-e-execucao): redes de distribuição interna para gases combustíveis em instalações residenciais e comerciais.
 - ABNT NBR 13103: instalação de aparelhos a gás para uso residencial.
+
+<p class="text-xs text-gray-500">Foto: <a href="https://www.pexels.com/pt-br/@nadin-sh-78971847/">Nadin Sh</a> via <a href="https://www.pexels.com">Pexels</a></p>
