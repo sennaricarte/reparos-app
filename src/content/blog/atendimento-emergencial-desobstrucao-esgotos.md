@@ -1,6 +1,7 @@
 ---
 title: "Atendimento Emergencial para Desobstrução de Esgotos: Soluções Rápidas e Eficazes"
-description: "Conheça as melhores práticas em atendimento emergencial para desobstrução de esgotos e resolva problemas rapidamente."
+seoTitle: "Desobstrução de Esgoto de Emergência: Como Agir"
+description: "Esgoto transbordando ou com refluxo? Veja sinais de emergência, o que fazer enquanto espera ajuda e como contratar a desobstrução com segurança."
 pubDate: 2026-02-20T18:53:15.376+00:00
 updatedDate: 2026-02-20T18:53:16.684824+00:00
 category: "Hidráulica"

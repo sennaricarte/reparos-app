@@ -1,6 +1,6 @@
 ---
 title: "Como Detectar Vazamentos Ocultos Sem Quebrar Nada"
-description: "Aprenda a identificar vazamentos ocultos sem quebrar nada, usando técnicas eficazes de detecção de vazamentos."
+description: "Aprenda a identificar vazamentos ocultos sem quebrar nada: sinais de alerta, técnicas de detecção e quando chamar um profissional."
 pubDate: 2026-02-20T17:15:37.476+00:00
 updatedDate: 2026-02-20T17:15:38.861024+00:00
 category: "Hidráulica"

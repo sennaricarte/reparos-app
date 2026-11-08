@@ -1,6 +1,7 @@
 ---
 title: "Como desentupir o ralo do banheiro: guia prático (e sem estresse!)"
-description: "Ralo do banheiro entupido? Aprenda como resolver o problema de forma rápida e segura com dicas de quem entende de manutenção. Veja 5 métodos práticos e evite erros que podem danificar seus canos. Confira o guia da Reparos!"
+seoTitle: "Como Desentupir o Ralo do Banheiro: Guia Prático"
+description: "Ralo do banheiro entupido? Veja como identificar a causa, quais métodos caseiros funcionam e os erros que podem danificar os canos."
 pubDate: 2026-02-20T17:17:09.013+00:00
 updatedDate: 2026-02-20T17:17:10.358629+00:00
 category: "Hidráulica"

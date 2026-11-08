@@ -1,43 +1,30 @@
-# Astro Starter Kit: Minimal
+# Reparos (reparos.app.br)
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+Site informativo sobre hidráulica, elétrica e reformas em São Paulo. Astro 7, Tailwind 4, deploy na Vercel (saída estática).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Comandos
 
-## 🚀 Project Structure
+| Comando | Ação |
+| :-- | :-- |
+| `pnpm install` | Instala dependências |
+| `pnpm dev` | Servidor local em `localhost:4321` |
+| `pnpm build` | Gera o site em `./dist/` |
+| `pnpm preview` | Pré-visualiza o build |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Estrutura
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- `src/content/blog/`: posts em Markdown (schema em `src/content.config.ts`).
+- `src/pages/`: páginas de serviço e blog.
+- `src/components/SEO.astro`: title, description, canonical, Open Graph.
+- `vercel.json`: redirects 301 e headers de cache.
+- `scripts/`: utilitários de manutenção de conteúdo (uso eventual).
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Frontmatter dos posts
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `seoTitle`: até 60 caracteres, sem sufixo da marca.
+- `description`: 120 a 155 caracteres.
+- `updatedDate`: só alterar quando o conteúdo mudar de verdade (alimenta o `lastmod` do sitemap).
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Analytics (opcional)
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Defina `PUBLIC_GA_MEASUREMENT_ID` (ex.: `G-XXXXXXXXXX`) nas variáveis de ambiente da Vercel. Sem ela, nenhum script de analytics é carregado.
