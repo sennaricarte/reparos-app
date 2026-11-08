@@ -84,7 +84,7 @@ const jsonDateModified = showUpdated ? (post.data.updatedDate ?? post.data.pubDa
       "@type": "BlogPosting",
       "headline": post.data.title,
       "description": post.data.description,
-      "image": [new URL(post.data.image ? (post.data.image.src ?? post.data.image) : '/assets/og-default.png', SITE.url).toString()],
+      "image": post.data.image ? [new URL(post.data.image.src ?? post.data.image, SITE.url).toString()] : undefined,
       "datePublished": post.data.pubDate.toISOString(),
       "dateModified": jsonDateModified,
       "author": { "@type": "Organization", "name": SITE.name, "url": SITE.url },
