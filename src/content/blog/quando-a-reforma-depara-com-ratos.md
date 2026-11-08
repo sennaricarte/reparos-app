@@ -1,6 +1,6 @@
 ---
 title: "Quando a Reforma Depara com Ratos: O Que Fazer?"
-description: "Descubra o que fazer quando a reforma depara com ratos e como garantir um ambiente seguro e livre de pragas."
+description: "Encontrou ratos durante a reforma? Veja o que fazer, como proteger a obra e a família e quando chamar um serviço de controle de pragas."
 pubDate: 2026-02-20T19:00:52.987+00:00
 updatedDate: 2026-02-20T19:00:54.278036+00:00
 category: "Reformas"

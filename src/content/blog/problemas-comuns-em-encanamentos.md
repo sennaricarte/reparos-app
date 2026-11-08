@@ -1,6 +1,7 @@
 ---
 title: "Problemas Comuns em Encanamentos: Guia Prático para Não Entrar pelo Cano"
-description: "Cano vazando ou conta de água alta? Conheça os problemas de encanamento mais comuns e aprenda a resolvê-los com as dicas dos especialistas da Reparos. Clique e economize!"
+seoTitle: "Problemas Comuns em Encanamentos e Como Resolver"
+description: "Cano vazando ou conta de água alta? Conheça os problemas de encanamento mais comuns, como identificar cada um e quando chamar um profissional."
 pubDate: 2026-02-20T17:16:07.415+00:00
 updatedDate: 2026-02-20T17:16:08.75667+00:00
 category: "Hidráulica"

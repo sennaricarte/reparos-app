@@ -1,6 +1,6 @@
 ---
 title: "Desentupimento de Esgoto: Soluções Eficazes para Sua Casa"
-description: "Saiba como lidar com o desentupimento de esgoto de forma prática e segura. Confira dicas essenciais!"
+description: "Saiba como lidar com o desentupimento de esgoto em casa: sinais, causas comuns, o que evitar e quando chamar um profissional."
 pubDate: 2026-02-24T11:54:45.956+00:00
 updatedDate: 2026-02-24T11:54:47.532077+00:00
 category: "Hidráulica"

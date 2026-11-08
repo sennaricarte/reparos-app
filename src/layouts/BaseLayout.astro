@@ -5,6 +5,7 @@ import Schema from '../components/Schema.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import Analytics from '../components/Analytics.astro';
 import { SITE } from '../config/site';
 import inter400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 
@@ -51,6 +52,7 @@ const websiteLd = {
       noindex={noindex}
     />
 
+    <Analytics />
     <slot name="head" />
   </head>
   <body class="antialiased min-h-screen bg-white text-[var(--color-ink)]">

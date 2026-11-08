@@ -30,13 +30,14 @@ const breadcrumbLd = {
   ]
 };
 
-const serviceLd = {
+const pageLd = {
   "@context": "https://schema.org",
-  "@type": "Service",
+  "@type": "CollectionPage",
   "name": title,
   "description": description ?? '',
-  "provider": { "@type": "Organization", "name": SITE.name, "url": SITE.url, "logo": SITE.url.replace(/\/$/,'') + '/favicon.svg' },
-  "url": canonical
+  "url": canonical,
+  "inLanguage": "pt-BR",
+  "isPartOf": { "@type": "WebSite", "name": SITE.name, "url": SITE.url }
 };
 ---
 
@@ -67,7 +68,7 @@ const serviceLd = {
     </div>
 
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)}></script>
-    <script type="application/ld+json" set:html={JSON.stringify(serviceLd)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(pageLd)}></script>
   </div>
 </BaseLayout>
 

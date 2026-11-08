@@ -1,0 +1,17 @@
+---
+// GA4 opcional. Só renderiza se PUBLIC_GA_MEASUREMENT_ID estiver definido (ex.: G-XXXXXXXXXX)
+// nas variáveis de ambiente da Vercel. Sem a variável, nada é carregado.
+const id = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+const valid = typeof id === 'string' && /^G-[A-Z0-9]{6,}$/.test(id);
+---
+{valid ? (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${id}`}></script>
+    <script is:inline define:vars={{ id }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', id);
+    </script>
+  </>
+) : null}

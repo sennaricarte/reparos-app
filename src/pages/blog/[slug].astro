@@ -29,7 +29,7 @@ const related = posts
   .slice(0,3);
 
 const canonical = new URL(`/blog/${post.id}/`, SITE.url).toString();
-const seoTitle = (post.data.seoTitle ?? post.data.title) + ' | ' + SITE.name;
+const seoTitle = post.data.seoTitle ?? post.data.title;
 
 // compute whether updatedDate is a different day than pubDate in America/Sao_Paulo
 const pubDay = new Date(post.data.pubDate).toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' });

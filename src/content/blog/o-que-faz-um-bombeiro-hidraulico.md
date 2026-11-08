@@ -1,6 +1,7 @@
 ---
 title: "O que faz um bombeiro hidráulico? Entenda as funções e quando contratar"
-description: "Descubra o que faz um bombeiro hidráulico e por que ele é essencial para a segurança da sua casa. Entenda a diferença entre encanador e especialista com a Reparos."
+seoTitle: "O Que Faz um Bombeiro Hidráulico e Quando Contratar"
+description: "Saiba o que faz um bombeiro hidráulico, a diferença para o encanador e quando contratar esse profissional para a segurança da sua casa."
 pubDate: 2026-02-20T17:17:40.046+00:00
 updatedDate: 2026-02-20T17:17:41.409796+00:00
 category: "Hidráulica"

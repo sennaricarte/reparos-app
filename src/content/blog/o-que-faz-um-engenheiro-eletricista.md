@@ -1,6 +1,7 @@
 ---
 title: "O que faz um Engenheiro Eletricista? Guia Completo sobre a Carreira e Atuação"
-description: "Descubra o que faz um engenheiro eletricista em 2026, as áreas de atuação mais rentáveis (como energia solar e automação) e saiba quando contratar esse profissional para garantir a segurança do seu imóvel. Leia o guia da Reparos!"
+seoTitle: "O Que Faz um Engenheiro Eletricista: Atuação"
+description: "Veja o que faz um engenheiro eletricista, as áreas de atuação, como a função difere da do eletricista e quando contratar para projetos no imóvel."
 pubDate: 2026-02-20T17:16:33.479+00:00
 updatedDate: 2026-02-20T17:16:34.8327+00:00
 category: "Elétrica"
